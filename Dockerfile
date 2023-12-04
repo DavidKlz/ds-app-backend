@@ -15,4 +15,4 @@ ARG APP_NAME
 ENV APP_NAME=$APP_NAME
 WORKDIR /root/
 COPY --from=build /$APP_NAME ./
-CMD ["/bin/sh", "-c", "/app/${APP_NAME}"]
+CMD ["/app/${APP_NAME}"]
