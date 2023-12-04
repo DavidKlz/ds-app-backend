@@ -1,14 +1,18 @@
-FROM golang:1.20
+ARG APP_NAME=ds-app-backend
 
+# Build stage
+FROM golang:1.20 as build
+ARG APP_NAME
+ENV APP_NAME=$APP_NAME
 WORKDIR /app
-
-COPY go.mod go.sum ./
+COPY . .
 RUN go mod download
+RUN go build -o /$APP_NAME
 
-COPY . ./
-
-RUN CGO_ENABLED=0 GOOS=linux go build -o /ds-app-backend
-
-EXPOSE 3000
-
-CMD ["/ds-app-backend"]
+# Production stage
+FROM alpine:latest as production
+ARG APP_NAME
+ENV APP_NAME=$APP_NAME
+WORKDIR /root/
+COPY --from=build /$APP_NAME ./
+CMD ./$APP_NAME
