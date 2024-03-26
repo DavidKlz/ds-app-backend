@@ -19,6 +19,7 @@ class VariableService(var repository: VariableRepository) {
                     dataType = DataType.getDataTypeForIndex(newVar.dataTypeId),
                     isEditable = newVar.isEditable,
                     isRequired = newVar.isRequired,
+                    values = newVar.values,
                 )
             )
     }

@@ -12,6 +12,8 @@ data class VariableDTOResponse (
         val isEditable:Boolean,
         @JsonProperty("name")
         val name: String,
+        @JsonProperty("values")
+        val values: List<String>,
         @JsonProperty("controlTypeId")
         val controlTypeId: Int,
         @JsonProperty("dataTypeId")

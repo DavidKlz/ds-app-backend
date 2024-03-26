@@ -18,6 +18,11 @@ import java.util.UUID
 @RestController
 @RequestMapping("/formular")
 class FormularController(var service: FormularService) {
+    @GetMapping("/all")
+    fun getFormulare() : List<FormularDTOResponse> {
+        return service.getFormulare();
+    }
+
     @PostMapping("/create")
     fun createFormular(@RequestBody newForm: FormularDTORequest) : FormularDTOResponse {
         return service.createFormular(newForm)

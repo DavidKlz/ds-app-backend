@@ -1,1 +1,2 @@
 FROM openjdk:20
+EXPOSE 8080

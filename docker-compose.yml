@@ -5,6 +5,8 @@ networks:
 services:
   java:
     platform: linux/x86_64
+    ports:
+      - "8080:8080"
     build:
       context: .
       dockerfile: Dockerfile

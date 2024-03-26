@@ -36,6 +36,7 @@ class FormularService(var repository: FormularRepository, var variableService: V
                     isEditable = it.isEditable,
                     controlTypeId = it.controlType.index,
                     dataTypeId = it.dataType.index,
+                    values = it.values,
                 )
             }.toSet()
         )
@@ -51,6 +52,26 @@ class FormularService(var repository: FormularRepository, var variableService: V
         repository.deleteById(id)
     }
 
+    fun getFormulare() : List<FormularDTOResponse> {
+        return repository.findAll().map { formular ->
+            FormularDTOResponse(
+                id = formular.id,
+                name = formular.name,
+                variables = formular.variables.map {variable ->
+                    VariableDTOResponse(
+                        id = variable.id,
+                        isEditable = variable.isEditable,
+                        controlTypeId = variable.controlType.index,
+                        dataTypeId = variable.dataType.index,
+                        name = variable.name,
+                        isRequired = variable.isRequired,
+                        values = variable.values,
+                    )
+                }.toSet()
+            )
+        }
+    }
+
     fun getFormular(id: UUID) : FormularDTOResponse? {
         return repository.findById(id).map { formular ->
             FormularDTOResponse(
@@ -64,6 +85,7 @@ class FormularService(var repository: FormularRepository, var variableService: V
                         dataTypeId = variable.dataType.index,
                         name = variable.name,
                         isRequired = variable.isRequired,
+                        values = variable.values,
                     )
                 }.toSet()
             )
@@ -92,6 +114,7 @@ class FormularService(var repository: FormularRepository, var variableService: V
                     isEditable = it.isEditable,
                     controlTypeId = it.controlType.index,
                     dataTypeId = it.dataType.index,
+                    values = it.values,
                 )
             }.toSet()
         )

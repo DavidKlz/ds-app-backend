@@ -11,6 +11,8 @@ data class Variable(
         val isRequired: Boolean,
         val isEditable: Boolean,
         val name: String,
+        @ElementCollection
+        val values: List<String>,
         @Enumerated(EnumType.ORDINAL)
         val controlType: ControlType,
         @Enumerated(EnumType.ORDINAL)
